@@ -10,14 +10,14 @@
 void myResidual(
 	int nCells,
 	int nFaces,
-	volatile double* rAPtr,
-	volatile const double* sourcePtr,
-	volatile const double* diagPtr,
-	volatile const double* psiPtr,
-	volatile const double* lowerPtr,
-	volatile const double* upperPtr,
-	volatile const int* uPtr,
-	volatile const int* lPtr
+	double* rAPtr,
+	const double* sourcePtr,
+	const double* diagPtr,
+	const double* psiPtr,
+	const double* lowerPtr,
+	const double* upperPtr,
+	const int* uPtr,
+	const int* lPtr
 );
 
 #endif
