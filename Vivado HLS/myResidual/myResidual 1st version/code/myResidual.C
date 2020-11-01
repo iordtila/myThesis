@@ -36,11 +36,13 @@ void myResidual
 
 	for (int cell=0; cell<nCells; cell++)
  	{
+		#pragma HLS LOOP_TRIPCOUNT min=0 max=525
 		rAPtr[cell] = sourcePtr[cell] - diagPtr[cell]*psiPtr[cell];
     	}
 
     	for (int face=0; face<nFaces; face++)
     	{
+		#pragma HLS LOOP_TRIPCOUNT min=0 max=3756
 		rAPtr[uPtr[face]] -= lowerPtr[face]*psiPtr[lPtr[face]];
      		rAPtr[lPtr[face]] -= upperPtr[face]*psiPtr[uPtr[face]];
     	}
