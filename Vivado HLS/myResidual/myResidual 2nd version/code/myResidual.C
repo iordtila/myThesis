@@ -38,7 +38,6 @@ void myResidual
  	{
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=525
 		#pragma HLS PIPELINE
-        	
 		rAPtr[cell] = sourcePtr[cell] - diagPtr[cell]*psiPtr[cell];
     	}
 
@@ -47,7 +46,6 @@ void myResidual
 		#pragma HLS DEPENDENCE variable=rAPtr intra false
 		#pragma HLS PIPELINE
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=3756
-	        
 		rAPtr[uPtr[face]] -= lowerPtr[face]*psiPtr[lPtr[face]];
      		rAPtr[lPtr[face]] -= upperPtr[face]*psiPtr[uPtr[face]];
     	}
