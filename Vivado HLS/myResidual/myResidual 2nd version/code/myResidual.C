@@ -4,24 +4,24 @@ void myResidual
 (
 	int nCells,
 	int nFaces,
-	volatile double* rAPtr,
-	volatile const double* sourcePtr,
-	volatile const double* diagPtr,
-	volatile const double* psiPtr,
-	volatile const double* lowerPtr,
-	volatile const double* upperPtr,
-	volatile const int* uPtr,
-	volatile const int* lPtr
+	double* rAPtr,
+	const double* sourcePtr,
+	const double* diagPtr,
+	const double* psiPtr,
+	const double* lowerPtr,
+	const double* upperPtr,
+	const int* uPtr,
+	const int* lPtr
 )
 {
-#pragma HLS INTERFACE m_axi depth=3756 port=lPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=3756 port=uPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=3756 port=upperPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=3756 port=lowerPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=525 port=psiPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=525 port=diagPtr offset=slave
-#pragma HLS INTERFACE m_axi depth=525 port=sourcePtr offset=slave
-#pragma HLS INTERFACE m_axi depth=525 port=rAPtr offset=slave
+#pragma HLS INTERFACE m_axi depth=3756 port=lPtr offset=slave bundle=gmem4
+#pragma HLS INTERFACE m_axi depth=3756 port=uPtr offset=slave bundle=gmem4
+#pragma HLS INTERFACE m_axi depth=3756 port=upperPtr offset=slave bundle=gmem3
+#pragma HLS INTERFACE m_axi depth=3756 port=lowerPtr offset=slave bundle=gmem3
+#pragma HLS INTERFACE m_axi depth=525 port=psiPtr offset=slave bundle=gmem2
+#pragma HLS INTERFACE m_axi depth=525 port=diagPtr offset=slave bundle=gmem1
+#pragma HLS INTERFACE m_axi depth=525 port=sourcePtr offset=slave bundle=gmem0
+#pragma HLS INTERFACE m_axi depth=525 port=rAPtr offset=slave bundle=gmem0
 #pragma HLS INTERFACE s_axilite port=lPtr bundle=control
 #pragma HLS INTERFACE s_axilite port=uPtr bundle=control
 #pragma HLS INTERFACE s_axilite port=upperPtr bundle=control
