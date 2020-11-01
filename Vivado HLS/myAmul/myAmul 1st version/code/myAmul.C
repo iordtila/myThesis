@@ -41,14 +41,12 @@ void myAmul
 	for (int cell=0; cell<nCells; cell++)
     	{
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=525
-		
 		ApsiPtr[cell]= diagPtr[cell]*psiPtr[cell];
     	}
 
 	for (int face=0; face<nFaces; face++)
     	{
     		#pragma HLS LOOP_TRIPCOUNT min=0 max=3756
-
     		ApsiPtr[lPtr[face]] += upperPtr[face]*psiPtr[uPtr[face]];
     		ApsiPtr[uPtr[face]] += lowerPtr[face]*psiPtr[lPtr[face]];
     	}
