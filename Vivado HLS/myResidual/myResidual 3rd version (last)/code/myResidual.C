@@ -4,14 +4,14 @@ void myResidual
 (
 	int nCells,
 	int nFaces,
-	volatile double* rAPtr,
-	volatile const double* sourcePtr,
-	volatile const double* diagPtr,
-	volatile const double* psiPtr,
-	volatile const double* lowerPtr,
-	volatile const double* upperPtr,
-	volatile const int* uPtr,
-	volatile const int* lPtr
+	double* rAPtr,
+	const double* sourcePtr,
+	const double* diagPtr,
+	const double* psiPtr,
+	const double* lowerPtr,
+	const double* upperPtr,
+	const int* uPtr,
+	const int* lPtr
 )
 {
 #pragma HLS INTERFACE m_axi depth=3756 port=lPtr offset=slave bundle=gmem4
@@ -40,7 +40,6 @@ void myResidual
  	{
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=525
 		#pragma HLS PIPELINE
-        	
 		rAPtr_temp[cell] = sourcePtr[cell] - diagPtr[cell]*psiPtr[cell];
     	}
 
@@ -49,7 +48,6 @@ void myResidual
 		#pragma HLS DEPENDENCE variable=rAPtr_temp intra false
 		#pragma HLS PIPELINE
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=3756
-	        
 		rAPtr_temp[uPtr[face]] -= lowerPtr[face]*psiPtr[lPtr[face]];
      		rAPtr_temp[lPtr[face]] -= upperPtr[face]*psiPtr[uPtr[face]];
     	}
@@ -58,7 +56,6 @@ void myResidual
 	{
 		#pragma HLS PIPELINE
 		#pragma HLS LOOP_TRIPCOUNT min=0 max=525
-    		
 		rAPtr[i] = rAPtr_temp[i];
     	}
 
